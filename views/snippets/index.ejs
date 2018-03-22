@@ -1,0 +1,14 @@
+<% include ../partials/header %>
+
+<h1>This is the snippets page</h1>
+ <ol>
+    <% snippets.forEach(function(snippet){ %>
+               <li>
+                   <a href="/snippets/<%= snippet._id %>"><%= snippet.title %></a>
+               </li>
+    <% }); %>
+ </ol>
+ <a class="btn btn-success" style="margin-left: 5px;" href="/snippets/new">Add New Snippet</a>
+</div>
+
+<% include ../partials/footer %>

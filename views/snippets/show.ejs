@@ -1,0 +1,44 @@
+<% include ../partials/headerShow %>
+<div class="col-md-9">
+    <div class="thumbnail">
+        <div class="caption-full">
+            <h4><a><%=snippet.title%></a></h4>
+            <code id="snippetCode" class="html"><%= snippet.description %></code>
+            <p>
+                <em>Submitted By <%= snippet.author.username %> at <%= snippet.dateOfCreation %></em>
+            </p>
+            <% if(currentUser && snippet.author.id.equals(currentUser._id)){ %>
+                <a class="btn btn-xs btn-warning" href="/snippets/<%= snippet._id %>/edit">Edit</a>
+                <form id="delete-form" style="display: inline-block;" action="/snippets/<%= snippet._id %>?_method=DELETE" method="POST">
+                    <button class="btn btn-xs btn-danger">Delete</button>
+                </form>
+            <% }%>
+        </div>
+    </div>
+    <div class="well">
+        <div class="text-right">
+            <a class="btn btn-success" href="/snippets/<%= snippet._id %>/comments/new">Add New Comment</a>
+        </div>
+        <hr>
+        <% snippet.comments.forEach(function(comment){ %>
+            <div class="row">
+                <div class="col-md-12">
+                    <strong><%= comment.author.username %></strong>
+                    <span class="pull-right">10 days ago</span>
+                    <p>
+                        <%= comment.text %> 
+                    </p>
+                <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
+                    <a class="btn btn-xs btn-warning" 
+                       href="/snippet/<%=snippet._id %>/comments/<%=comment._id %>/edit">Edit</a>
+                    <form id="delete-form" action="/snippets/<%=snippet._id %>/comments/<%=comment._id %>?_method=DELETE" method="POST">
+                        <input type="submit" class="btn btn-xs btn-danger" value="Delete">
+                    </form>
+                <% } %>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+</div>
+
+<% include ../partials/footer %>
