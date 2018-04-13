@@ -1,9 +1,10 @@
 <% include ./partials/header %> 
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb" style = "background-color: #fff !important;">
+    <li class="breadcrumb-item active" aria-current="page">Profile:  <%= currentUser.username %></li><% if(currentUser.username === "admin") {%><a href="/admin">  (Move to Admin Control Panel)</a><%}%>
+  </ol>
+</nav>
 
-<div><span class="nav-link" href="#">Profile Page for  <%= currentUser.username %></span></div>
-<% if(currentUser.username === "admin") {%>
-<a href="/admin">Move to Admin Control Panel</a>
-<%}%>
 <h5 style="margin-left: 37px;">Created Snippets</h5>
 <ol style="list-style: none;">
  	<% var categories = ['Javascript', 'CSS', 'HTML', 'Other']; %>
@@ -13,15 +14,9 @@
  		<% snippets.forEach(function(snippet){ %>
  			<% if(snippet.category === category) { %>
  			<li>
-                <div class="card" style="width: 50%;">
-  					<div class="card-header"></div>
-  					<div class="card-body" style="padding: 5px;">
-	    				<h5 class="card-title"><%= snippet.title %></h5>
-	    				<p class="card-text"><%= snippet.main %></p>
-	    				<a href="/snippets/<%= snippet._id %>" class="btn btn-primary">View</a>
-  					</div>
-				</div>
-            </li>
+                   <a href="/snippets/<%= snippet._id %>"><%= snippet.title %></a>
+                   <span><%= snippet.main %></span>
+               </li>
             <br>
             <% } %>
                

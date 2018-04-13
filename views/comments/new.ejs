@@ -1,6 +1,7 @@
 <% include ../partials/header %>
 <div class="container">
     <div>
+        <% console.log(snippet._id) %>
         <h1 style="text-align: center">Add New Comment to <%= snippet.title %></h1>
         <div style="width: 75%; margin: 25px auto;">
             <form action="/snippets/<%= snippet._id %>/comments" method="POST">
@@ -11,7 +12,7 @@
                     <button class="btn btn-lg btn-primary btn-block">Submit!</button>
                 </div>
             </form>
-            <a href="/snippets">Go Back</a>
+            <a href="/snippets/<%= snippet._id %>">Go Back</a>
         </div>
     </div>
 </div>
