@@ -49,6 +49,11 @@ router.get("/logout", function(req, res){
    res.redirect("/snippets");
 });
 
+// show register form
+router.get("/search", function(req, res){
+   res.render("search"); 
+});
+
 //show user profile
 router.get("/profile", function(req, res){
     if(req.isAuthenticated()){
