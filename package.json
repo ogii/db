@@ -11,18 +11,22 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.2",
+    "codemirror": "^5.36.0",
     "connect-flash": "^0.1.1",
+    "connect-mongo": "^2.0.1",
     "ejs": "^2.5.7",
     "express": "^4.16.2",
     "express-session": "^1.15.6",
     "flash": "^1.1.0",
-    "js-beautify": "^1.7.5",
+    "he": "^1.1.1",
+    "html-entities": "^1.2.1",
     "method-override": "^2.3.10",
     "mongodb": "^3.0.4",
     "mongoose": "^5.0.10",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^5.0.0",
-    "pretty-print": "^1.1.0"
+    "socket.io": "^2.1.0",
+    "utf8": "^3.0.0"
   }
 }

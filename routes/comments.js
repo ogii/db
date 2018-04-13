@@ -1,11 +1,11 @@
 var express = require("express");
 var router  = express.Router({mergeParams: true});
-var Campground = require("../models/snippet");
+var Snippet = require("../models/snippet");
 var Comment = require("../models/comment");
 var middleware = require("../middleware");
 
 //Comments New
-router.get("/new",middleware.isLoggedIn, function(req, res){
+router.get("/new", middleware.isLoggedIn, middleware.checkSnippetExistance, function(req, res){
     // find snippet by id
     console.log(req.params.id);
     Snippet.findById(req.params.id, function(err, snippet){
@@ -18,18 +18,20 @@ router.get("/new",middleware.isLoggedIn, function(req, res){
 });
 
 //Comments Create
-router.post("/",middleware.isLoggedIn,function(req, res){
+router.post("/",middleware.isLoggedIn, function(req, res){
    //lookup snippet using ID
    Snippet.findById(req.params.id, function(err, snippet){
        if(err){
            console.log(err);
-           res.redirect("/snippets");
+           res.redirect("/snippets/");
        } else {
         Comment.create(req.body.comment, function(err, comment){
            if(err){
-               req.flash("error", "Something went wrong.")
+               req.flash("error", err.name + " - Something went wrong.");
                console.log(err);
+               res.redirect('/snippets/' + snippet._id + '/comments/new');
            } else {
+               comment.dateOfCreation = new Date().toJSON().slice(0,10).replace(/-/g,'/');
                //add username and id to comment
                comment.author.id = req.user._id;
                comment.author.username = req.user.username;
@@ -47,7 +49,7 @@ router.post("/",middleware.isLoggedIn,function(req, res){
 });
 
 // COMMENT EDIT ROUTE
-router.get("/:comment_id/edit", middleware.checkCommentOwnership, function(req, res){
+router.get("/:comment_id/edit", middleware.checkCommentOwnership, middleware.checkCommentExistance, function(req, res){
    Comment.findById(req.params.comment_id, function(err, foundComment){
       if(err){
           res.redirect("back");
@@ -58,7 +60,7 @@ router.get("/:comment_id/edit", middleware.checkCommentOwnership, function(req, 
 });
 
 // COMMENT UPDATE
-router.put("/:comment_id", middleware.checkCommentOwnership, function(req, res){
+router.put("/:comment_id", middleware.checkCommentOwnership, middleware.checkCommentExistance, function(req, res){
    Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, function(err, updatedComment){
       if(err){
           res.redirect("back");

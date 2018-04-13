@@ -1,24 +1,40 @@
-<% include ../partials/header %>
+<% include ../partials/headerEdit %>
 <div class="container">
-    <div class="row">
+    <div>
         <h1 style="text-align: center">Create a New Snippet</h1>
-        <div style="width: 30%; margin: 25px auto;">
-            <form action="/snippets" method="POST">
+        <div style="width: 75%; margin: 25px auto;">
+            <form id="submitForm" action="/snippets" method="POST">
                 <div class="form-group">
                     <input class="form-control" type="text" name="title" placeholder="Title">
                 </div>
                 <div class="form-group">
-                    <input class="form-control" type="datetime-local" name="dateOfCreation" placeholder="Date">
+                    <select id="categoryList" name="category" class="form-control">
+                        <option value="Javascript">Javascript</option>
+                        <option value="HTML">HTML</option>
+                        <option value="CSS">CSS</option>
+                        <option value="Other">Other</option>
+                    </select>
                 </div>
                 <div class="form-group">
-                    <input class="form-control" type="text" name="description" placeholder="description">
+                    <div>
+                        <textarea class="form-control" rows="9" name="main" placeholder="Describe the snippet"></textarea>
+                    </div>
+                </div>
+                <div class="form-group" style="display: none;">
+                    <div class="">
+                        <textarea id="inputDesc" name="description" value="test" form="submitForm"></textarea>
+                    </div>
                 </div>
                 <div class="form-group">
-                    <button class="btn btn-lg btn-primary btn-block">Submit!</button>
+                    <div class="form-control" id="editor" form="submitForm"></div>
+                </div>
+                <div class="form-group">
+                    <button id="submitBtn" class="btn btn-lg btn-primary btn-block">Submit!</button>
                 </div>
             </form>
-            <a href="/campgrounds">Go Back</a>
+            <a href="/snippets">Go Back</a>
         </div>
     </div>
 </div>
-<% include ../partials/footer %>
+    <script>$(document).ready(function() {init('');});</script>
+<% include ../partials/footerNew %>

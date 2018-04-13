@@ -1,0 +1,35 @@
+<% include ./partials/header %> 
+
+<div><span class="nav-link" href="#">Profile Page for  <%= currentUser.username %></span></div>
+<% if(currentUser.username === "admin") {%>
+<a href="/admin">Move to Admin Control Panel</a>
+<%}%>
+<h5 style="margin-left: 37px;">Created Snippets</h5>
+<ol style="list-style: none;">
+ 	<% var categories = ['Javascript', 'CSS', 'HTML', 'Other']; %>
+ 	<% categories.forEach(function(category) { %>
+ 		<br>
+ 		<span ><%= category %></span>
+ 		<% snippets.forEach(function(snippet){ %>
+ 			<% if(snippet.category === category) { %>
+ 			<li>
+                <div class="card" style="width: 50%;">
+  					<div class="card-header"></div>
+  					<div class="card-body" style="padding: 5px;">
+	    				<h5 class="card-title"><%= snippet.title %></h5>
+	    				<p class="card-text"><%= snippet.main %></p>
+	    				<a href="/snippets/<%= snippet._id %>" class="btn btn-primary">View</a>
+  					</div>
+				</div>
+            </li>
+            <br>
+            <% } %>
+               
+    	<% }); %>
+ 	<% }); %>
+    
+ </ol>
+ <br>
+ <h5>Favorited Snippets</h5>
+ <em>Under construction</em>
+<% include ./partials/footer %> 

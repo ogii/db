@@ -4,6 +4,28 @@ var Comment = require("../models/comment");
 // all the middleare goes here
 var middlewareObj = {};
 
+middlewareObj.checkSnippetExistance = function(req, res, next) {
+  Snippet.findById(req.params.id, function(err, foundSnippet) {
+    if(err) {
+      req.flash("error", "This snippet doesn't exist.");
+      res.redirect("/snippets");
+    } else {
+      next();
+    }
+  });
+}
+
+middlewareObj.checkCommentExistance = function(req, res, next) {
+  Snippet.findById(req.params.comment_id, function(err, foundSnippet) {
+    if(err) {
+      req.flash("error", "This Comment doesn't exist.");
+      res.redirect("/snippets");
+    } else {
+      next();
+    }
+  });
+}
+
 middlewareObj.checkSnippetOwnership = function(req, res, next) {
  if(req.isAuthenticated()){
         Snippet.findById(req.params.id, function(err, foundSnippet){
@@ -12,7 +34,7 @@ middlewareObj.checkSnippetOwnership = function(req, res, next) {
                res.redirect("back");
            }  else {
                // does user own the Snippet?
-            if(foundSnippet.author.id.equals(req.user._id)) {
+            if(foundSnippet.author.id.equals(req.user._id) || foundSnippet.author.username.equals('admin')) {
                 next();
             } else {
                 req.flash("error", "You don't have permission to do that");

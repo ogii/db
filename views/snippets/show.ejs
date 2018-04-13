@@ -1,18 +1,33 @@
 <% include ../partials/headerShow %>
+<% console.log(snippet) %>
+<script src="../../static/codeeditor.js"></script>
 <div class="col-md-9">
     <div class="thumbnail">
         <div class="caption-full">
-            <h4><a><%=snippet.title%></a></h4>
-            <code id="snippetCode" class="html"><%= snippet.description %></code>
-            <p>
-                <em>Submitted By <%= snippet.author.username %> at <%= snippet.dateOfCreation %></em>
-            </p>
-            <% if(currentUser && snippet.author.id.equals(currentUser._id)){ %>
+            <h4><%=snippet.title%></h4>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <%= snippet.main %>
+                </div>
+            </div>
+            <br>
+            <h6 class="label label-primary"><%=snippet.category%></h6>
+            <br>
+            <pre class=prettyprint" style="font-size: 12px !important; border: 1px solid darkgray;" id="snippetCode"><%= snippet.description %></pre>
+            <a id="copyBtn" class="btn btn-success" href="#" data-clipboard-target="#snippetCode">Copy</a>
+             <% if(currentUser) { %>
+                <a id="favBtn" class="btn btn-primary" href="#">Add to Favorites</a>
+                <%}%>
+             <% if(currentUser && snippet.author.id.equals(currentUser._id)){ %>
                 <a class="btn btn-xs btn-warning" href="/snippets/<%= snippet._id %>/edit">Edit</a>
                 <form id="delete-form" style="display: inline-block;" action="/snippets/<%= snippet._id %>?_method=DELETE" method="POST">
                     <button class="btn btn-xs btn-danger">Delete</button>
                 </form>
             <% }%>
+            <br>
+            <p>
+                <em>Submitted By <%= snippet.author.username %> on <%= snippet.dateOfCreation %></em>
+            </p>
         </div>
     </div>
     <div class="well">
@@ -24,21 +39,33 @@
             <div class="row">
                 <div class="col-md-12">
                     <strong><%= comment.author.username %></strong>
-                    <span class="pull-right">10 days ago</span>
+                    <span class="pull-right">comment.dateOfCreation</span>
                     <p>
                         <%= comment.text %> 
                     </p>
                 <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
                     <a class="btn btn-xs btn-warning" 
-                       href="/snippet/<%=snippet._id %>/comments/<%=comment._id %>/edit">Edit</a>
-                    <form id="delete-form" action="/snippets/<%=snippet._id %>/comments/<%=comment._id %>?_method=DELETE" method="POST">
+                       href="/snippets/<%=snippet._id %>/comments/<%=comment._id %>/edit">Edit</a>
+                    <form id="delete-form" style="display: inline-block;" action="/snippets/<%=snippet._id %>/comments/<%=comment._id %>?_method=DELETE" method="POST">
                         <input type="submit" class="btn btn-xs btn-danger" value="Delete">
                     </form>
+                    <hr>
                 <% } %>
                 </div>
             </div>
         <% }) %>
     </div>
 </div>
+<script>var form = document.getElementById('delete-form');
+var copyButton = new ClipboardJS('#copyBtn');
+copyButton.on('success', function(e) {
+    $('#copyBtn').html('Copied');
+    e.clearSelection();
+});
+form.onsubmit = function () {
+    // this method is cancelled if window.confirm returns false
+    return window.confirm('Are you sure that you want to delete this snippet?');
+};
+</script>
 
 <% include ../partials/footer %>

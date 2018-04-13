@@ -1,12 +1,22 @@
 <% include ../partials/header %>
-
-<h1>This is the snippets page</h1>
- <ol>
-    <% snippets.forEach(function(snippet){ %>
-               <li>
+<div style="text-align: left; padding-left: 10px;">
+<h1>一覧ページ</h1>
+ <ol style="list-style: none;">
+ 	<% var categories = ['Javascript', 'CSS', 'HTML', 'Other']; %>
+ 	<% categories.forEach(function(category) { %>
+ 		<br>
+ 		<h6><%= category %></h6>
+ 		<% snippets.forEach(function(snippet){ %>
+ 			<% if(snippet.category === category) { %>
+ 			<li>
                    <a href="/snippets/<%= snippet._id %>"><%= snippet.title %></a>
+                   <span><%= snippet.main %></span>
                </li>
-    <% }); %>
+            <% } %>
+               
+    	<% }); %>
+ 	<% }); %>
+    
  </ol>
  <a class="btn btn-success" style="margin-left: 5px;" href="/snippets/new">Add New Snippet</a>
 </div>

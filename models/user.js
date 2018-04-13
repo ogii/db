@@ -5,6 +5,7 @@ var UserSchema = new mongoose.Schema({
     username: String,
     password: String,
     level: String,
+    favorites: String,
     snippet: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Snippet"

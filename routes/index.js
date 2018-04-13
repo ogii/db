@@ -2,6 +2,7 @@ var express = require("express");
 var router  = express.Router();
 var passport = require("passport");
 var User = require("../models/user");
+var Snippet = require("../models/snippet");
 
 //root route
 router.get("/", function(req, res){
@@ -30,7 +31,7 @@ router.post("/register", function(req, res){
 
 //show login form
 router.get("/login", function(req, res){
-   res.render("login"); 
+  res.render("login"); 
 });
 
 //handling login logic
@@ -46,6 +47,34 @@ router.get("/logout", function(req, res){
    req.logout();
    req.flash("success", "Logged you out!");
    res.redirect("/snippets");
+});
+
+//show user profile
+router.get("/profile", function(req, res){
+    if(req.isAuthenticated()){
+          console.log('HEYYYY' + req.user._id);
+          Snippet.find({'author.id' : req.user._id},function(err, allSnippets){
+            res.render("profile", {snippets:allSnippets});
+         });
+      } else {
+               req.flash("error", "You need to be logged in to do that!");
+               res.redirect("/login");
+      }
+});
+
+//show admin page
+router.get("/admin", function(req, res){
+  var sessions = req.sessionStore.sessions;
+  res.render("admin", {sessions:sessions});
+    //if(req.isAuthenticated()){
+         // console.log('HEYYYY' + req.user._id);
+          //Snippet.find({'author.id' : req.user._id},function(err, allSnippets){
+            //res.render("profile", {snippets:allSnippets});
+         //});
+      //} else {
+              // req.flash("error", "You need to be logged in to do that!");
+               //res.redirect("/login");
+     // }
 });
 
 module.exports = router;

@@ -15,6 +15,8 @@
 
   <!-- Custom styles for this template -->
   <link href="https://v4-alpha.getbootstrap.com/examples/starter-template/starter-template.css" rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" href="static/main.css">
 </head>
 
 <body>
@@ -29,12 +31,12 @@
                 <%= success %>
             </div>
         <% } %>
-    </div>
+</div>
   <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse fixed-top">
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand" href="#">snippetDB</a>
+    <a class="navbar-brand" href="/snippets">snippetDB</a>
 
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
       <ul class="navbar-nav mr-auto">
@@ -45,7 +47,7 @@
           <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
           <li class="nav-item"><a class="nav-link" href="/register">Sign Up</a></li>
           <% } else { %>
-          <li class="nav-item"><a class="nav-link" href="#">Signed In As <%= currentUser.username %></a></li>
+          <li class="nav-item"><a class="nav-link" href="/profile"><%= currentUser.username %></a></li>
           <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
         <% } %>
       </ul>

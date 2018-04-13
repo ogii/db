@@ -1,0 +1,18 @@
+div.newSnippet textarea {
+	display: inline-flex;
+	width: 50%;
+	margin: 25px auto;
+}    
+
+
+div.newSnippet form {
+	display: inline-block;
+}
+
+form[id="delete-form"] {
+	display: inline-block;
+}
+
+pre.prettyprint {
+	font-size: 75% !important;
+}

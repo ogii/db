@@ -9,8 +9,7 @@ var express     = require("express"),
 	  Snippet  = require("./models/snippet"),
     Comment     = require("./models/comment"),
     User        = require("./models/user"),
-    MongoClient = require('mongodb').MongoClient,
-    print = require('pretty-print');
+    MongoClient = require('mongodb').MongoClient;
 
 //requring routes
 var commentRoutes    = require("./routes/comments"),
@@ -19,15 +18,17 @@ var commentRoutes    = require("./routes/comments"),
 
 //Connect to database
 var uri = "mongodb://localhost:27017/assion";
-mongoose.connect('mongodb://localhost/mongoose_basics', function (err) {
+mongoose.connect('mongodb://localhost/assion2', function (err) {
    if (err) throw err;
    console.log('Successfully connected');
 });
 
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json({limit: "10mb"}));
+app.use(bodyParser.urlencoded({limit: "10mb", extended: true, parameterLimit:10000}));
 app.set('view options', { pretty: true });
 app.set("view engine", "ejs");
-app.use(express.static(__dirname + "/public"));
+app.use('/static', express.static('public'));
+app.use('/script', express.static('node_modules'));
 app.use(methodOverride("_method"));
 app.use(flash());
 
@@ -55,6 +56,10 @@ app.use(function(req, res, next){
 app.use("/", indexRoutes);
 app.use("/snippets", snippetRoutes);
 app.use("/snippets/:id/comments", commentRoutes);
+app.get('*', function(req, res){
+  req.flash("error", '404 - Page not found');
+  res.redirect('/');
+});
 
 app.listen(8000, function () {
 	console.log('Code snippet database ver1!');

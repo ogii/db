@@ -1,24 +1,49 @@
-<% include ../partials/header %>
-<div class="container">
-    <div class="row">
+<% include ../partials/headerEdit %>
+<div>
+    <div>
         <h1 style="text-align: center">Edit <%= snippet.title %></h1>
-        <div style="width: 30%; margin: 25px auto;">
-            <form action="/snippets<%= snippet._id %>?_method=PUT" method="POST">
+        <div style="width: 75%; margin: 25px auto;">
+            <form id="editForm" action="/snippets/<%= snippet._id %>?_method=PUT" method="POST">
                 <div class="form-group">
-                    <input class="form-control" type="text" name="snippet[title]" value="<%= snippet.title %>">
+                    <h6>Title</h6>
+                    <input class="form-control" type="text" name="snippet[title]" value="<%= snippet.title %>" placeholder="Enter a title">
                 </div>
                 <div class="form-group">
-                    <input class="form-control" type="datetime-local" name="snippet[dateOfCreation]" value="<%= snippet.dateOfCreation %>">
+                <h6>Category</h6>
+                    <select id="categoryList" class="form-control" form="editForm" name="snippet[category]">
+                    <%
+                    var options = [ "Javascript", "HTML", "CSS", "Other"];
+                    for ( var i = 0; i < options.length; i++ )
+                    {
+                        var selected = ( options[i] == snippet.category) ? "selected" : "";
+                        %><option value="<%=options[i] %>" <%=selected %>><%=options[i] %></option><%
+                    }
+                    %>
+                    </select>
                 </div>
                 <div class="form-group">
-                    <input class="form-control" type="text" name="snippet[description]" value="<%= snippet.description %>">
+                    <div class="">
+                        <h6>Description</h6>
+                        <input class="form-control" rows="9" name="snippet[main]" value="<%= snippet.main %>" placeholder="Enter a description"></input>
+                    </div>
+                </div>
+                <div class="form-group" style="display: none;">
+                    <div class="col-md-12">
+                        <textarea id="inputDesc" class="form-control" name="snippet[description]" placeholder="Describe the snippet" value="" form="editForm"></textarea>
+                    </div>
+                </div>
+                <h6>Code</h6>
+                <div class="form-group">
+                    <div class="form-control" id="editor"></div>
                 </div>
                 <div class="form-group">
-                    <button class="btn btn-lg btn-primary btn-block">Submit!</button>
+                    <a href="#" id="submitEdit" class="btn btn-lg btn-primary btn-block">Submit!</a>
                 </div>
-            </form>
-            <a href="/snippets">Go Back</a>
+                </form>
+                <a href="/snippets">Go Back</a>
+            </div>
         </div>
     </div>
-</div>
-<% include ../partials/footer %>
+    <script src="../../static/codeeditor.js"></script>
+    <script>var code = `<%= snippet.description %>`; $( document ).ready(function() {init(code);});</script>
+        <% include ../partials/footerEdit %>
