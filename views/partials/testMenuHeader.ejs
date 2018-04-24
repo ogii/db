@@ -1,0 +1,30 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Slideout Demo</title>
+    <link rel="stylesheet" type="text/css" href="../static/index.css">
+</head>
+
+<body>
+    <div class="hamburger" id="hamburger" onclick="toggleSidenav();">
+  <div></div>
+  <div></div>
+  <div></div>
+</div>
+
+<nav>
+  <div class="links">
+    <a class="active" href="/snippets">snippetDB</a>
+    <a href="/snippets">Database</a>
+    <% if(!currentUser){ %>
+          <a class="nav-link" href="/login">Login</a>
+          <a class="nav-link" href="/register">Sign Up</a>
+          <% } else { %>
+          <a class="nav-link" href="/profile"><%= currentUser.username %></a>
+          <a class="nav-link" href="/logout">Logout</a>
+        <% } %>
+  </div>
+</nav>
+
+<div class="main">

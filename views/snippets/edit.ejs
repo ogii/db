@@ -6,11 +6,11 @@
             <form id="editForm" action="/snippets/<%= snippet._id %>?_method=PUT" method="POST">
                 <div class="form-group">
                     <h6>Title</h6>
-                    <input class="form-control" type="text" name="snippet[title]" value="<%= snippet.title %>" placeholder="Enter a title">
+                    <input class="form-control" type="text" name="snippet[title]" value="<%= snippet.title %>" placeholder="Enter a title" required>
                 </div>
                 <div class="form-group">
                 <h6>Category</h6>
-                    <select id="categoryList" class="form-control" form="editForm" name="snippet[category]">
+                    <select id="categoryList" class="form-control" form="editForm" name="snippet[category]" required>
                     <%
                     var options = [ "Javascript", "HTML", "CSS", "Other"];
                     for ( var i = 0; i < options.length; i++ )
@@ -24,12 +24,12 @@
                 <div class="form-group">
                     <div class="">
                         <h6>Description</h6>
-                        <textarea class="form-control" rows="9" name="snippet[main]" value="<%= snippet.main %>" placeholder="Enter a description"></textarea>
+                        <input class="form-control" rows="9" name="snippet[main]" value="<%= snippet.main %>" placeholder="Enter a description" required></input>
                     </div>
                 </div>
                 <div class="form-group" style="display: none;">
                     <div class="col-md-12">
-                        <textarea id="inputDesc" class="form-control" name="snippet[description]" placeholder="Describe the snippet" value="" form="editForm"></textarea>
+                        <textarea id="inputDesc" class="form-control" name="snippet[description]" placeholder="Describe the snippet" value="" form="editForm" required></textarea>
                     </div>
                 </div>
                 <h6>Code</h6>
@@ -40,7 +40,7 @@
                     <a href="#" id="submitEdit" class="btn btn-lg btn-primary btn-block">Submit!</a>
                 </div>
                 </form>
-                <a href="/snippets">Go Back</a>
+                <a href="/snippets/<%= snippet._id %>">Go Back</a>
             </div>
         </div>
     </div>

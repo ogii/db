@@ -9,6 +9,11 @@ router.get("/", function(req, res){
     res.render("index");
 });
 
+//show testpage
+router.get("/test", function(req, res){
+  res.render("test"); 
+});
+
 // show register form
 router.get("/register", function(req, res){
    res.render("register"); 

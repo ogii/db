@@ -9,6 +9,7 @@ var snippetSchema = new mongoose.Schema({
       minlength: 5
    },
    dateOfCreation: String,
+   viewCount: Number,
    description: {
       type: String,
       required: true,
