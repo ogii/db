@@ -9,6 +9,8 @@ html, body {
   position: fixed;
   z-index: 9999;
   padding: 15px;
+  width: 100%;
+  background-color: #383838;
 }
 
 .hamburger:hover { cursor: pointer; }
@@ -58,7 +60,7 @@ nav a:hover { background-color: #5d5959 !important; }
 nav a:visited { color: rgba(255,255,255,.5); }
 
 nav a.active {
-  background-color: black;
+  background-color: #383838;
   color: white;
 }
 
@@ -96,4 +98,28 @@ section {
   height: 100vh;
   line-height: 100vh;
   text-align: center;
+}
+
+div.main ol {
+  padding-top: 40px;
+}
+
+ div.main form {
+  padding-top: 65px;
+}
+
+div.main div.container {
+  padding-top: 70px;
+}
+
+.menu-icon {
+  width: 10%;
+}
+
+div.links a {
+  text-align: left;
+}
+
+nav.header a{
+  padding-left: 7px;
 }

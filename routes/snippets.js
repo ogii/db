@@ -16,6 +16,54 @@ router.get("/", function(req, res){
   });
 });
 
+//Javascript - show all js snippets
+router.get("/javascript", function(req, res){
+  // Get all snippets from DB
+  Snippet.find({}, function(err, allSnippets){
+     if(err){
+         console.log(err);
+     } else {
+        res.render("snippets/javascript",{snippets:allSnippets});
+     }
+  });
+});
+
+//CSS - show all js snippets
+router.get("/css", function(req, res){
+  // Get all snippets from DB
+  Snippet.find({}, function(err, allSnippets){
+     if(err){
+         console.log(err);
+     } else {
+        res.render("snippets/css",{snippets:allSnippets});
+     }
+  });
+});
+
+//HTML - show all js snippets
+router.get("/html", function(req, res){
+  // Get all snippets from DB
+  Snippet.find({}, function(err, allSnippets){
+     if(err){
+         console.log(err);
+     } else {
+        res.render("snippets/html",{snippets:allSnippets});
+     }
+  });
+});
+
+//Other - show all js snippets
+router.get("/other", function(req, res){
+  // Get all snippets from DB
+  Snippet.find({}, function(err, allSnippets){
+     if(err){
+         console.log(err);
+     } else {
+        res.render("snippets/other",{snippets:allSnippets});
+     }
+  });
+});
+
 //CREATE - add new snippet to DB
 router.post("/", middleware.isLoggedIn, function(req, res){
   // get data from form and add to snippet array

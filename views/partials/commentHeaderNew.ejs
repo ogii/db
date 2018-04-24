@@ -1,15 +1,22 @@
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8">
-    <link rel="icon" href="https://www.assion.co.jp/wp-content/uploads/2015/03/favicon.ico">
-    <link rel="stylesheet" type="text/css" href="../static/index.css">
-    <title>Assion Code SnippetDB</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="https://www.assion.co.jp/wp-content/uploads/2015/03/favicon.ico">
+
+  <title>Assion Code SnippetDB</title>
+  <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/starter-template/">
 
   <!-- Bootstrap core CSS -->
   <link href="https://v4-alpha.getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
 
+  <link rel="stylesheet" type="text/css" href="static/main.css">
+  <link rel="stylesheet" type="text/css" href="../../../static/index.css">
 </head>
+
 
 <body>
     <div class="hamburger" id="hamburger" onclick="toggleSidenav();">
@@ -35,7 +42,9 @@
         <% } %>
   </div>
 </nav>
-<div class="container">
+
+<div class="main">
+  <div class="container">
         <% if(error && error.length > 0){ %>
             <div class="alert alert-danger" role="alert">
                 <%= error %>
@@ -47,5 +56,3 @@
             </div>
         <% } %>
 </div>
-
-<div class="main">

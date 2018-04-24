@@ -1,25 +1,26 @@
-<% include ./partials/header %> 
+<% include ../partials/headerShow  %>
 
-<h5 style="margin-left: 37px;">Created Snippets</h5>
-<ol style="list-style: none;">
- 	<% var categories = ['Javascript', 'CSS', 'HTML', 'Other']; %>
+<div style="text-align: left; padding-left: 10px;">
+ <ol style="list-style: none;">
+ 	<% var categories = ['Javascript']; %>
  	<% categories.forEach(function(category) { %>
  		<br>
- 		<span ><%= category %></span>
+ 		<h6><%= category %></h6>
  		<% snippets.forEach(function(snippet){ %>
  			<% if(snippet.category === category) { %>
  			<li>
                    <a href="/snippets/<%= snippet._id %>"><%= snippet.title %></a>
                    <span><%= snippet.main %></span>
                </li>
-            <br>
             <% } %>
                
     	<% }); %>
  	<% }); %>
     
  </ol>
- <br>
- <h5>Favorited Snippets</h5>
- <em>Under construction</em>
-<% include ./partials/footer %> 
+<% if(currentUser){ %>
+ <a class="btn btn-success" style="margin-left: 5px;" href="/snippets/new">Add New Snippet</a>
+ <% } %>
+</div>
+
+<% include ../partials/footer %>
