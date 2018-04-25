@@ -100,13 +100,13 @@ section {
   text-align: center;
 }
 
-div.main ol {
+/*div.main ol {
   padding-top: 40px;
-}
+}*/
 
- div.main form {
+ /*div.main form:not(#delete-form) {
   padding-top: 65px;
-}
+}*/
 
 div.main div.container {
   padding-top: 70px;
@@ -123,3 +123,7 @@ div.links a {
 nav.header a{
   padding-left: 7px;
 }
+
+/*#codeBody {
+  padding-top: 70px;
+}*/
