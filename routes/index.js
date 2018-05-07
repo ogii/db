@@ -21,7 +21,7 @@ router.get("/register", function(req, res){
 
 //handle sign up logic
 router.post("/register", function(req, res){
-    var newUser = new User({username: req.body.username});
+    var newUser = new User({username: req.body.username, level:0, favorites:{}, snippets:{}});
     User.register(newUser, req.body.password, function(err, user){
         if(err){
             req.flash("error", err.message);
@@ -64,7 +64,9 @@ router.get("/profile", function(req, res){
     if(req.isAuthenticated()){
           console.log('HEYYYY' + req.user._id);
           Snippet.find({'author.id' : req.user._id},function(err, allSnippets){
-            res.render("profile", {snippets:allSnippets});
+            User.find({'_id' : req.user._id}, function(err, foundUser){
+              res.render("profile", {snippets:allSnippets, foundUser:foundUser});
+            });
          });
       } else {
                req.flash("error", "You need to be logged in to do that!");

@@ -6,6 +6,7 @@
     <div class="thumbnail">
         <div class="caption-full">
             <h4><%=snippet.title%></h4>
+            <p><%= snippet.favorite%>
             <p>
                 <em>Submitted By <%= snippet.author.username %> on <%= snippet.dateOfCreation %></em>
             </p>
@@ -21,7 +22,7 @@
             <pre class=prettyprint" style="font-size: 12px !important; border: 1px solid darkgray;" id="snippetCode"><%= snippet.description %></pre>
             <a id="copyBtn" class="btn btn-success" href="#" data-clipboard-target="#snippetCode">Copy</a>
              <% if(currentUser) { %>
-                <a id="favBtn" class="btn btn-primary" href="#">Add to Favorites</a>
+                <a id="favBtn" class="btn btn-primary" href="<%= snippet._id %>/favorite">Add to Favorites</a>
                 <%}%>
              <% if(currentUser && snippet.author.id.equals(currentUser._id)){ %>
                 <a class="btn btn-xs btn-warning" href="/snippets/<%= snippet._id %>/edit">Edit</a>

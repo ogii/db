@@ -77,4 +77,29 @@ middlewareObj.isLoggedIn = function(req, res, next){
     res.redirect("/login");
 };
 
+/*middlewareObj.checkIfFavoriteOrNot = function(req, res, next) {
+ if(req.isAuthenticated()){
+        Snippet.findById(req.params.id, function(err, foundSnippet){
+           if(err){
+            console.log(err);
+               req.flash("error", "Snippet not found");
+               res.redirect("back");
+           }  else {
+               // does user own the Snippet?
+            //if(foundSnippet.favorite.contains(req.user._id)) {
+             // next();
+                //req.flash("error", "This snippet is already favorited!");
+                //res.redirect("back");
+           //} else {
+                next();
+            //}
+           }
+        });
+    } else {
+        req.flash("error", "You need to be logged in to do that!");
+        res.redirect("back");
+    }
+};
+*/
+
 module.exports = middlewareObj;

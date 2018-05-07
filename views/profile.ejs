@@ -12,7 +12,6 @@
                    <a href="/snippets/<%= snippet._id %>"><%= snippet.title %></a>
                    <span><%= snippet.main %></span>
                </li>
-            <br>
             <% } %>
                
     	<% }); %>
@@ -21,5 +20,5 @@
  </ol>
  <br>
  <h5>Favorited Snippets</h5>
- <em>Under construction</em>
+ <em><% console.log(foundUser) %></em>
 <% include ./partials/footer %> 

@@ -2,6 +2,7 @@ var express = require("express");
 var router  = express.Router();
 var Snippet = require("../models/snippet");
 var middleware = require("../middleware");
+var User = require("../models/user");
 //var utf8 = require('utf8');
 
 //INDEX - show all snippets
@@ -73,11 +74,12 @@ router.post("/", middleware.isLoggedIn, function(req, res){
   var description = req.body.description;
   var category = req.body.category;
   var viewCount = 0;
+  var favorite = [];
   var author = {
       id: req.user._id,
       username: req.user.username
   };
-  var newSnippet = {title: title, dateOfCreation: dateOfCreation, main: main, description: description, category: category, viewCount: viewCount, author:author};
+  var newSnippet = {title: title, dateOfCreation: dateOfCreation, main: main, description: description, category: category, viewCount: viewCount, favorite:favorite, author:author};
   // Create a new sn and snippete to DB
   Snippet.create(newSnippet, function(err, newlyCreated){
       if(err){
@@ -135,21 +137,22 @@ router.put("/:id",middleware.checkSnippetOwnership,middleware.checkSnippetExista
          res.redirect("/snippets/" + req.params.id);
      }
   });
+});//{ "$push": { "favorites": req.body.snippet } }
+
+router.get("/:id/favorite", function(req, res){
+  Snippet.findById(req.params.id, function(err, foundSnippet){
+      User.update({_id:req.user._id}, {$push: {"favorite": foundSnippet}}, function(err, updatedUser) {
+        if(err){
+          console.log(err);
+        } else {
+          req.flash("success", "Added to favorites");
+          res.redirect("/snippets/" + req.params.id);
+          console.log('update' + foundSnippet);
+        }
+      });
+  });
 });
 
-/*// Increase favorite
-router.put("/:id",middleware.checkSnippetOwnership,middleware.checkSnippetExistance, function(req, res){
-  // find and update the correct snippet
-  Snippet.findByIdAndUpdate(req.params.id, req.body.snippet, function(err, updatedSnippet){
-     if(err){
-         res.redirect("/snippets");
-     } else {
-         console.log(req.body);
-         req.flash("success", "Successfully edited snippet");
-         res.redirect("/snippets/" + req.params.id);
-     }
-  });
-});*/
 
 // DESTROY Snippet ROUTE
 router.delete("/:id",middleware.checkSnippetOwnership, function(req, res){

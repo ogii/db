@@ -29,6 +29,13 @@ var snippetSchema = new mongoose.Schema({
       },
       username: String
    },
+   /*favorite: {
+      id: {
+         type: mongoose.Schema.Types.ObjectId,
+         ref: "User"
+      },
+      username: String
+   },*/
    comments: [
       {
          type: mongoose.Schema.Types.ObjectId,
