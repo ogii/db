@@ -18,7 +18,7 @@
             <br>
             <h6 class="label label-primary"><%=snippet.category%></h6>
             <br>
-            <pre class=prettyprint" style="font-size: 12px !important; border: 1px solid darkgray;" id="snippetCode"><%= snippet.description %></pre>
+            <pre class="prettyprint" style="font-size: 12px !important; border: 1px solid darkgray;" id="snippetCode"><%= snippet.description %></pre>
             <a id="copyBtn" class="btn btn-success" href="#" data-clipboard-target="#snippetCode">Copy</a>
              <% if(currentUser) { %>
                 <a id="favBtn" class="btn btn-primary" href="<%= snippet._id %>/favorite">Add to Favorites</a>

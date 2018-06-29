@@ -24,16 +24,16 @@ $(document).on('click', '#submitBtn', function(e) {
 $(document).on('change', '#categoryList', function(e) {
 	switch(this.options[e.target.selectedIndex].text.toLowerCase()) {
 		case 'Javascript':
-		myCodeMirror.editor.setOption("mode", 'javascript');
+		myCodeMirror.setOption("mode", 'javascript');
 			break;
 		case 'HMTL':
-		myCodeMirror.editor.setOption("mode", 'html');
+		myCodeMirror.setOption("mode", 'html');
 			break;
 		case 'CSS':
-		myCodeMirror.editor.setOption("mode", 'css');
+		myCodeMirror.setOption("mode", 'css');
 			break;
 		case 'Other':
-		myCodeMirror.editor.setOption("mode", 'javascript');
+		myCodeMirror.setOption("mode", 'javascript');
 			break;
 		default:
 			break;
