@@ -3,7 +3,7 @@ var router  = express.Router();
 var passport = require("passport");
 var User = require("../models/user");
 var Snippet = require("../models/snippet");
-mongoose.Promise = Promise;
+//mongoose.Promise = Promise;
 
 //root route
 router.get("/", function(req, res){
