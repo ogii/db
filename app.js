@@ -17,8 +17,8 @@ var commentRoutes    = require("./routes/comments"),
     indexRoutes      = require("./routes/index");
 
 //Connect to database
-var uri = "mongodb://localhost:27017/assion";
-mongoose.connect('mongodb://localhost/assion2', function (err) {
+var uri = "mongodb://localhost:27017/test";
+mongoose.connect('mongodb://localhost/test', function (err) {
    if (err) throw err;
    console.log('Successfully connected');
 });
@@ -34,7 +34,7 @@ app.use(flash());
 
 // PASSPORT CONFIGURATION
 app.use(require("express-session")({
-    secret: "nasedesu",
+    secret: "testsecret",
     resave: false,
     saveUninitialized: false
 }));
